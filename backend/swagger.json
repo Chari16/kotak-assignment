@@ -1,0 +1,126 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "Products CRUD",
+      "description": "Kotak api documentation",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:5000",
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "Products",
+        "description": "API for products in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+			"paths": {
+				"/products": {
+					"get": {
+						"tags": ["Products"],
+						"summary": "Get all products in system",
+						"responses": {
+							"200": {
+								"description": "OK",
+								"schema": {
+									"$ref": "#/definitions/Product"
+								}
+							}
+						}
+					},
+					"post": {
+						"tags": ["Products"],
+						"description": "Create new product in system",
+						"parameters": [
+							{
+								"name": "product",
+								"in": "body",
+								"description": "Product that we want to create",
+								"schema": {
+									"$ref": "#/definitions/Product"
+								}
+							}
+						],
+						"produces": ["application/json"],
+						"responses": {
+							"200": {
+								"description": "New product is created",
+								"schema": {
+									"$ref": "#/definitions/Product"
+								}
+							}
+						}
+					}
+				},
+				"/products/{id}": {
+					"parameters": [
+						{
+							"name": "id",
+							"in": "path",
+							"required": true,
+							"description": "ID of product that we want to find",
+							"type": "string"
+						}
+					],
+					"put": {
+						"summary": "Update product with given ID",
+						"tags": ["Products"],
+						"parameters": [
+							{
+								"name": "user",
+								"in": "body",
+								"description": "User with new values of properties",
+								"schema": {
+									"$ref": "#/definitions/Product"
+								}
+							}
+						],
+						"responses": {
+							"204": {
+								"description": "User is updated"
+							}
+						}
+					},
+					"get": {
+						"summary": "Get product with given ID",
+						"tags": ["Products"],
+						"responses": {
+							"200": {
+								"description": "Product found successfully",
+								"schema": {
+									"$ref": "#/definitions/Product"
+								}
+							}
+						}
+					},
+					"delete": {
+						"summary": "Delete product with given ID",
+						"tags": ["Products"],
+						"responses": {
+							"204": {
+								"description": "Product deleted successfully"
+							}
+						}
+					}
+				}
+			},
+			"definitions": {
+				"Product": {
+					"required": ["name", "description"],
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						}
+					}
+				}
+			}
+  }
